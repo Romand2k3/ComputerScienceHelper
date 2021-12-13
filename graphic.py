@@ -60,17 +60,17 @@ class HubFrame:
 
         self.Thm1Btn = tk.Button(self.MidllePanel)
         self.Thm1Btn.grid(column=0, row=1)
-        self.Thm1Btn.configure(text="gogogo")
+        self.Thm1Btn.configure(text="Математические основы\nвычислительной техники")
         self.Thm1Btn['command'] = self.showThm1
 
         self.Thm2Btn = tk.Button(self.MidllePanel)
         self.Thm2Btn.grid(column=1, row=1)
-        self.Thm2Btn.configure(text="gogogo")
+        self.Thm2Btn.configure(text="Логические основы\nвычислительной техники")
         self.Thm2Btn['command'] = self.showThm2
 
         self.Thm3Btn = tk.Button(self.MidllePanel)
         self.Thm3Btn.grid(column=2, row=1)
-        self.Thm3Btn.configure(text="gogogo")
+        self.Thm3Btn.configure(text="Основы комбинаторики и\nтеории вероятностей")
         self.Thm3Btn['command'] = self.showThm3
 
         self.GreetLbl = tk.Label(self.TopPanel)
@@ -148,24 +148,3 @@ class HubFrame:
         self.MidllePanel_Thm2.grid_remove()
         self.MidllePanel_Thm3.grid_remove()
         self.MidllePanel.grid(column=0, row=1)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
