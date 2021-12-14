@@ -18,6 +18,7 @@ def decimalToBinary(value):
     assert d & (d - 1) == 0  # power of two
     return f'{sign}{floor(fint):b}.{n:0{d.bit_length() - 1}b}'
 
+
 def numAfterComm(number, number_new):
     """
     функция вычисления количества знаков после запятой после перевода
@@ -30,6 +31,7 @@ def numAfterComm(number, number_new):
     after_comm_new = math.ceil(after_comm * math.log(10, 2))
     len_before_comm = abs(str(number_new).find('.')) + 1
     return len_before_comm+after_comm_new
+
 
 def from_10_to_2_8_16():
     """
@@ -193,9 +195,95 @@ def from_16_to_10():
     lbl_result_from_10_to_16_dop.grid(column=2,row=2)
 
 
-
 def types_of_code_3():
-    pass
+    """
+
+    :return:
+    """
+    def convert_types_of_code_3():
+        """
+
+        :return:
+        """
+        number_types_of_code_3_real = [0]*16
+        number_types_of_code_3_invert = [0]*16
+        number_types_of_code_3_dop = [0]*16
+        number_types_of_code_3 = ent_number_types_of_code_3.get()
+        number_types_of_code_3_bin = str(decimalToBinary(int(number_types_of_code_3)))[:len(str(decimalToBinary(int(number_types_of_code_3))))-2]
+        if int(number_types_of_code_3) < 0:
+            number_types_of_code_3_real[0] = 1
+            number_types_of_code_3_invert[0] = 1
+            number_types_of_code_3_dop[0] = 1
+            number_types_of_code_3_bin = number_types_of_code_3_bin[1:]
+
+        q = 0
+        for i in range((len(number_types_of_code_3_real)-len(number_types_of_code_3_bin)), len(number_types_of_code_3_real)):
+            number_types_of_code_3_real[i] = int(number_types_of_code_3_bin[q])
+            q = q+1
+        if int(number_types_of_code_3) < 0:
+            q = 0
+            for i in range((len(number_types_of_code_3_invert) - len(number_types_of_code_3_bin)),len(number_types_of_code_3_invert)):
+                number_types_of_code_3_invert[i] = int(number_types_of_code_3_bin[q])
+                q = q + 1
+            for i in range(1, len(number_types_of_code_3_invert)):
+                if number_types_of_code_3_invert[i] == 0:
+                    number_types_of_code_3_invert[i] = 2
+            for i in range(1, len(number_types_of_code_3_invert)):
+                if number_types_of_code_3_invert[i] == 1:
+                    number_types_of_code_3_invert[i] = 0
+            for i in range(1, len(number_types_of_code_3_invert)):
+                if number_types_of_code_3_invert[i] == 2:
+                    number_types_of_code_3_invert[i] = 1
+
+
+            number_types_of_code_3_dop = [i for i in number_types_of_code_3_invert]
+
+            for i in range(len(number_types_of_code_3_dop)-1, 1, -1):
+                if number_types_of_code_3_dop[i] == 0:
+                    number_types_of_code_3_dop[i] = 1
+                    for j in range(i+1, len(number_types_of_code_3_dop)):
+                        number_types_of_code_3_dop[j] = 0
+                    break
+
+            lbl_result_types_of_code_3_real["text"] = number_types_of_code_3_real
+            lbl_result_types_of_code_3_invert["text"] = number_types_of_code_3_invert
+            lbl_result_types_of_code_3_dop["text"] = number_types_of_code_3_dop
+        else:
+            lbl_result_types_of_code_3_real["text"] = number_types_of_code_3_real
+            lbl_result_types_of_code_3_invert["text"] = number_types_of_code_3_real
+            lbl_result_types_of_code_3_dop["text"] = number_types_of_code_3_real
+
+
+
+
+    window_types_of_code_3 = tk.Tk()
+    window_types_of_code_3.title("Перевод из 10 в прямой, обратный и дополнительный код")
+    frame_types_of_code_3 = tk.Frame(window_types_of_code_3)
+    label_types_of_code_3 = tk.Label(window_types_of_code_3,
+                                   text="Введите число, которые необходимо перевести в 3 вида кода")
+    ent_number_types_of_code_3 = tk.Entry(frame_types_of_code_3, width=10)
+    btn_convert_types_of_code_3 = tk.Button(frame_types_of_code_3, width=5, text="=",
+                                          command=convert_types_of_code_3)
+
+    lbl_types_of_code_3_real = tk.Label(frame_types_of_code_3, text="Прямой:")
+    lbl_types_of_code_3_invert = tk.Label(frame_types_of_code_3, text="Обратный:")
+    lbl_types_of_code_3_dop = tk.Label(frame_types_of_code_3, text="Дополнительный:")
+
+    lbl_result_types_of_code_3_real= tk.Label(frame_types_of_code_3)
+    lbl_result_types_of_code_3_invert = tk.Label(frame_types_of_code_3)
+    lbl_result_types_of_code_3_dop = tk.Label(frame_types_of_code_3)
+
+    label_types_of_code_3.grid(column=0, row=0)
+    frame_types_of_code_3.grid(column=0, row=1)
+    ent_number_types_of_code_3.grid(column=0, row=1)
+    btn_convert_types_of_code_3.grid(column=1, row=1)
+    lbl_types_of_code_3_real.grid(column=0, row=3)
+    lbl_types_of_code_3_invert.grid(column=0, row=4)
+    lbl_types_of_code_3_dop.grid(column=0, row=5)
+    lbl_result_types_of_code_3_real.grid(column=1, row=3)
+    lbl_result_types_of_code_3_invert.grid(column=1, row=4)
+    lbl_result_types_of_code_3_dop.grid(column=1, row=5)
+
 
 def IEEE_754():
     pass
