@@ -197,12 +197,12 @@ def from_16_to_10():
 
 def types_of_code_3():
     """
-
+    окно перевода чсила из 10 в 2 в прямой, обратный и дополнительный код
     :return:
     """
     def convert_types_of_code_3():
         """
-
+        функция логики перевода числа из 10 в 2 в прямой, обратный и дополнительный коды
         :return:
         """
         number_types_of_code_3_real = [0]*16
@@ -286,4 +286,56 @@ def types_of_code_3():
 
 
 def IEEE_754():
-    pass
+    """
+
+    :return:
+    """
+    def convert_IEEE_754():
+        number_IEEE_754 = float(ent_number_IEEE_754.get())
+        number_IEEE_754_new = decimalToBinary(float(number_IEEE_754))
+        if int(number_IEEE_754) < 0:
+            number_IEEE_754_sign = 1
+        else:
+            number_IEEE_754_sign = 0
+        if number_IEEE_754 >= 1:
+            number_IEEE_754_exp = decimalToBinary(str(number_IEEE_754_new).find(".")-1+127)
+            number_IEEE_754_mantis = number_IEEE_754_new[1:]
+        if number_IEEE_754 < 1:
+            number_IEEE_754_exp = decimalToBinary(-str(number_IEEE_754_new).find("1") + 128)
+            number_IEEE_754_mantis = number_IEEE_754_new[str(number_IEEE_754_new).find("1")+1:]
+        lbl_result_IEEE_754_sign["text"] = number_IEEE_754_sign
+        print(len(number_IEEE_754_exp))
+        lbl_result_IEEE_754_exp["text"] =("0"*(10 - len(number_IEEE_754_exp)) + str(number_IEEE_754_exp))[:8]
+        number_IEEE_754_mantis = number_IEEE_754_mantis.replace(".","" )
+        lbl_result_IEEE_754_mantis["text"] = number_IEEE_754_mantis[:23]
+
+
+
+
+    window_IEEE_754 = tk.Tk()
+    window_IEEE_754.title("Перевод из 10 в в IEEE_754")
+    frame_IEEE_754 = tk.Frame(window_IEEE_754)
+    label_IEEE_754 = tk.Label(window_IEEE_754,
+                                     text="Введите число, которые необходимо перевести в IEEE_754")
+    ent_number_IEEE_754 = tk.Entry(frame_IEEE_754, width=10)
+    btn_convert_IEEE_754 = tk.Button(frame_IEEE_754, width=5, text="=",
+                                       command=convert_IEEE_754)
+
+    lbl_IEEE_754_sign = tk.Label(frame_IEEE_754, text="Знак:")
+    lbl_IEEE_754_exp = tk.Label(frame_IEEE_754, text="Экспонента:")
+    lbl_IEEE_754_mantis = tk.Label(frame_IEEE_754, text="Мантисса:")
+
+    lbl_result_IEEE_754_sign = tk.Label(frame_IEEE_754)
+    lbl_result_IEEE_754_exp = tk.Label(frame_IEEE_754)
+    lbl_result_IEEE_754_mantis = tk.Label(frame_IEEE_754)
+
+    label_IEEE_754.grid(column=0, row=0)
+    frame_IEEE_754.grid(column=0, row=1)
+    ent_number_IEEE_754.grid(column=0, row=1)
+    btn_convert_IEEE_754.grid(column=1, row=1)
+    lbl_IEEE_754_sign.grid(column=0, row=3)
+    lbl_IEEE_754_exp.grid(column=0, row=4)
+    lbl_IEEE_754_mantis.grid(column=0, row=5)
+    lbl_result_IEEE_754_sign.grid(column=1, row=3)
+    lbl_result_IEEE_754_exp.grid(column=1, row=4)
+    lbl_result_IEEE_754_mantis.grid(column=1, row=5)
