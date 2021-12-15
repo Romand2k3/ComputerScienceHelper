@@ -41,7 +41,7 @@ def from_10_to_2_8_16():
 
     def from_10_to_2_8_16_logic():
         """
-        функция логики самого перевода из 10 системы в 2-8-16
+        функция логики самого перевода из 10 системы в 2-8-16 и вывод его
         :return:
         """
         number_from_10_to_2_8_16 = float(ent_number_from_10_to_2_8_16.get())
@@ -72,7 +72,7 @@ def multiplication_dividing():
     """
     def multiplication():
         """
-        функция умножения двух чисел
+        функция умножения двух чисел и вывод их
         :return:
         """
         number_deviding_1 = float(ent_number_multiplication_dividing.get())
@@ -83,7 +83,7 @@ def multiplication_dividing():
 
     def dividing():
         """
-        функция деления двух чисел
+        функция деления двух чисел и вывод их
         :return:
         """
         number_deviding_1 = float(ent_number_multiplication_dividing_second.get())
@@ -155,7 +155,7 @@ def from_16_to_10():
 
     def convert_from_10_to_16():
         """
-        функция перевода числа из 16 системы в 2 и перевод из дополнительного в прямой код
+        функция перевода числа из 16 системы в 2 и перевод из дополнительного в прямой код и вывод его
         :return:
         """
         number_from_10_to_16 = ent_number_from_10_to_16.get()
@@ -197,12 +197,12 @@ def from_16_to_10():
 
 def types_of_code_3():
     """
-    окно перевода чсила из 10 в 2 в прямой, обратный и дополнительный код
+    окно перевода числа из 10 в 2 в прямой, обратный и дополнительный код
     :return:
     """
     def convert_types_of_code_3():
         """
-        функция логики перевода числа из 10 в 2 в прямой, обратный и дополнительный коды
+        функция логики перевода числа из 10 в 2 в прямой, обратный и дополнительный коды и вывод его
         :return:
         """
         number_types_of_code_3_real = [0]*16
@@ -287,24 +287,30 @@ def types_of_code_3():
 
 def IEEE_754():
     """
-
+    окно перевода числа из 10 чистемы в 2 в формате IEEE_754
     :return:
     """
     def convert_IEEE_754():
+        """
+        функция логики перевода числа из 10 чистемы в 2 в формате IEEE_754 и вывод его
+        :return:
+        """
         number_IEEE_754 = float(ent_number_IEEE_754.get())
         number_IEEE_754_new = decimalToBinary(float(number_IEEE_754))
         if int(number_IEEE_754) < 0:
             number_IEEE_754_sign = 1
+            number_IEEE_754_new = number_IEEE_754_new[1:]
         else:
             number_IEEE_754_sign = 0
-        if number_IEEE_754 >= 1:
+
+
+        if number_IEEE_754 >= 1 or number_IEEE_754 <=-1 :
             number_IEEE_754_exp = decimalToBinary(str(number_IEEE_754_new).find(".")-1+127)
             number_IEEE_754_mantis = number_IEEE_754_new[1:]
-        if number_IEEE_754 < 1:
+        if number_IEEE_754 < 1 and number_IEEE_754 > -1:
             number_IEEE_754_exp = decimalToBinary(-str(number_IEEE_754_new).find("1") + 128)
             number_IEEE_754_mantis = number_IEEE_754_new[str(number_IEEE_754_new).find("1")+1:]
         lbl_result_IEEE_754_sign["text"] = number_IEEE_754_sign
-        print(len(number_IEEE_754_exp))
         lbl_result_IEEE_754_exp["text"] =("0"*(10 - len(number_IEEE_754_exp)) + str(number_IEEE_754_exp))[:8]
         number_IEEE_754_mantis = number_IEEE_754_mantis.replace(".","" )
         lbl_result_IEEE_754_mantis["text"] = number_IEEE_754_mantis[:23]
@@ -339,3 +345,31 @@ def IEEE_754():
     lbl_result_IEEE_754_sign.grid(column=1, row=3)
     lbl_result_IEEE_754_exp.grid(column=1, row=4)
     lbl_result_IEEE_754_mantis.grid(column=1, row=5)
+
+
+def print_sdnf():
+    """
+
+    :return:
+    """
+    def print_sdnf_logic():
+        """
+
+        :return:
+        """
+        pass
+    window_print_sdnf = tk.Tk()
+    window_print_sdnf.title("Перевод из 10 в в IEEE_754")
+    frame_print_sdnf = tk.Frame(window_print_sdnf)
+    label_print_sdnf = tk.Label(window_print_sdnf,
+                              text="Введите 16 цифр, соответствующих функции")
+    ent_print_sdnf = tk.Entry(frame_print_sdnf, width=10)
+    btn_print_sdnf = tk.Button(frame_print_sdnf, width=5, text="=",
+                                     command=print_sdnf_logic)
+    lbl_result_print_sdnf_table = tk.Label(frame_print_sdnf)
+    lbl_result_print_sdnf_func = tk.Label(frame_print_sdnf)
+
+
+    
+
+
