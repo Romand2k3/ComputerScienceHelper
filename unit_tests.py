@@ -1,6 +1,7 @@
 import unittest # библиотека для создания тестов
 from logic_and_smallgraphic import decimalToBinary, numAfterComm, fill_the_table # импорт тестируемых функции
 import pandas as pd # библиотека для создания правильного примера таблицы истинности для теста
+# таблица-пример для тестирования работы функции
 table_test = pd.DataFrame(
             [
                 [0, 0, 0, 0, 1],
