@@ -9,6 +9,7 @@ def decimalToBinary(value):
     :param value: число изначально
     :return: число после перевода
     """
+
     # !!!не мой код, использовал интернет!!!
     if not isfinite(value):
         return repr(value)  # inf nan
@@ -26,11 +27,30 @@ def numAfterComm(number, number_new):
     :param number_new: число после перевода
     :return: кол-во знаков после запятой
     """
-    temp = str(number)
-    after_comm = abs(temp.find('.') - len(temp)) - 1
-    after_comm_new = ceil(after_comm * log(10, 2))
-    len_before_comm = abs(str(number_new).find('.')) + 1
-    return len_before_comm+after_comm_new
+    if len(str(number)) <= 0 or len(str(number_new)) <= 0:
+        return 0
+    else:
+        temp = str(number)
+        after_comm = abs(temp.find('.') - len(temp)) - 1
+        after_comm_new = ceil(after_comm * log(10, 2))
+        len_before_comm = abs(str(number_new).find('.')) + 1
+        return len_before_comm+after_comm_new
+
+
+def fill_the_table(vector):
+    """
+    функция заполнения макета таблицы истинности по вектору логической функции
+    :param vector:
+    :return:
+    """
+    table_by_vector = table_truth
+    if len(vector) != 16:
+        return "Пожалуйста введите ровно 16 символов"
+    if len(vector) == 16:
+        for i in range(16):
+            table_by_vector.loc[i]["F"] = int(vector[i])
+        return table_by_vector
+
 
 
 def from_10_to_2_8_16():
@@ -296,13 +316,13 @@ def types_of_code_3():
 
 def IEEE_754():
     """
-    окно перевода числа из 10 чистемы в 2 в формате IEEE_754
+    окно перевода числа из 10 системы в 2 в формате IEEE_754
     :return:
     """
 
     def convert_IEEE_754():
         """
-        функция логики перевода числа из 10 чистемы в 2 в формате IEEE_754 и вывод его
+        функция логики перевода числа из 10 системы в 2 в формате IEEE_754 и вывод его
         :return:
         """
 
@@ -383,17 +403,11 @@ table_truth = pd.DataFrame(
     )
 
 
-
-
-
 def print_table_by_vector():
     """
     окно создания таблицы истинности по вектору функции
     :return:
     """
-    #макет таблицы истинности для СДНФ
-    table_sknf = table_truth
-
 
     def print_table_by_vector_logic():
         """
@@ -402,12 +416,7 @@ def print_table_by_vector():
         """
 
         number_table_by_vector = ent_number_table_by_vector.get()
-        if len(number_table_by_vector) != 16:
-            lbl_result_table_by_vector["text"] = "Пожалуйста введите ровно 16 символов"
-        if len(number_table_by_vector) == 16:
-            for i in range(16):
-                table_sknf.loc[i]["F"] = int(number_table_by_vector[i])
-            lbl_result_table_by_vector["text"] = table_sknf
+        lbl_result_table_by_vector["text"] = fill_the_table(number_table_by_vector)
 
     # создание нового окна и его основных элементов
     window_table_by_vector = tk.Tk()
@@ -439,9 +448,6 @@ def print_sdnf():
     окно создания таблицы истинности и скнф по вектору функции
     :return:
     """
-    #макет таблицы истинности для СДНФ
-    table_sdnf = table_truth
-
 
     def print_sdnf_logic():
         """
@@ -451,12 +457,9 @@ def print_sdnf():
 
         number_print_sdnf = ent_number_print_sdnf.get()
         number_print_sdnf_func = []
-        if len(number_print_sdnf) != 16:
-            lbl_result_print_sdnf_table["text"] = "Пожалуйста введите ровно 16 символов"
+        table_sdnf = fill_the_table(number_print_sdnf)
+        lbl_result_print_sdnf_table["text"] = table_sdnf
         if len(number_print_sdnf) == 16:
-            for i in range(16):
-                table_sdnf.loc[i]["F"] = int(number_print_sdnf[i])
-            lbl_result_print_sdnf_table["text"] = table_sdnf
             number_print_sdnf_only1 = (table_sdnf.loc[table_sdnf["F"] == 1])
             for i in range(len(number_print_sdnf_only1)):
                 number_print_sdnf_func.append("*(")
@@ -508,9 +511,6 @@ def print_sknf():
     :return:
     """
 
-    #макет таблицы истинности для СДНФ
-    table_sknf = table_truth
-
     def print_sknf_logic():
         """
         функция обработки вектора логической функции, построения таблицы истинности и СДНФ и их вывода
@@ -519,12 +519,9 @@ def print_sknf():
 
         number_print_sknf = ent_number_print_sknf.get()
         number_print_sknf_func = []
-        if len(number_print_sknf) != 16:
-            lbl_result_print_sknf_table["text"] = "Пожалуйста введите ровно 16 символов"
+        table_sknf = fill_the_table(number_print_sknf)
+        lbl_result_print_sknf_table["text"] = table_sknf
         if len(number_print_sknf) == 16:
-            for i in range(16):
-                table_sknf.loc[i]["F"] = int(number_print_sknf[i])
-            lbl_result_print_sknf_table["text"] = table_sknf
             number_print_sknf_only0 = (table_sknf.loc[table_sknf["F"] == 0])
             for i in range(len(number_print_sknf_only0)):
                 number_print_sknf_func.append("+(")
