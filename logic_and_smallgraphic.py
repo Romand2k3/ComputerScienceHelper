@@ -1,3 +1,4 @@
+import string
 import tkinter as tk # библиотека для графики
 from math import copysign, fabs, floor, isfinite, modf, factorial, ceil, log # для усложненных математических действий
 import pandas as pd # библиотека для работы с удобными таблицами
@@ -9,16 +10,18 @@ def decimalToBinary(value):
     :param value: число изначально
     :return: число после перевода
     """
-
-    # !!!не мой код, использовал интернет!!!
-    if not isfinite(value):
-        return repr(value)  # inf nan
-    sign = '-' * (copysign(1.0, value) < 0)
-    frac, fint = modf(fabs(value))  # split on fractional, integer parts
-    n, d = frac.as_integer_ratio()  # frac = numerator / denominator
-    assert d & (d - 1) == 0  # power of two
-    return f'{sign}{floor(fint):b}.{n:0{d.bit_length() - 1}b}'
-    # !!!конец не моего кода!!!
+    if (not (set(str(value)) <= set(string.digits + "-" + "."))):
+        return 0
+    else:
+        # !!!не мой код, использовал интернет!!!
+        if not isfinite(value):
+            return repr(value)  # inf nan
+        sign = '-' * (copysign(1.0, value) < 0)
+        frac, fint = modf(fabs(value))  # split on fractional, integer parts
+        n, d = frac.as_integer_ratio()  # frac = numerator / denominator
+        assert d & (d - 1) == 0  # power of two
+        return f'{sign}{floor(fint):b}.{n:0{d.bit_length() - 1}b}'
+        # !!!конец не моего кода!!!
 
 def numAfterComm(number, number_new):
     """
@@ -27,7 +30,7 @@ def numAfterComm(number, number_new):
     :param number_new: число после перевода
     :return: кол-во знаков после запятой
     """
-    if len(str(number)) <= 0 or len(str(number_new)) <= 0:
+    if (not (set(str(number)) <= set(string.digits + "-" + "."))) or (not (set(str(number_new)) <= set(string.digits + "-" + "."))):
         return 0
     else:
         temp = str(number)
@@ -40,12 +43,12 @@ def numAfterComm(number, number_new):
 def fill_the_table(vector):
     """
     функция заполнения макета таблицы истинности по вектору логической функции
-    :param vector:
+    :param vector: начальный набор нулей и единиц которым заполняется вектор
     :return:
     """
     table_by_vector = table_truth
-    if len(vector) != 16:
-        return "Пожалуйста введите ровно 16 символов"
+    if len(vector) != 16 or not (set(vector) <= set("0" + "1")):
+        return "Пожалуйста введите ровно 16 символов(0 или 1)"
     if len(vector) == 16:
         for i in range(16):
             table_by_vector.loc[i]["F"] = int(vector[i])
