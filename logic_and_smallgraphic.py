@@ -3,7 +3,6 @@ import tkinter as tk # библиотека для графики
 from math import copysign, fabs, floor, isfinite, modf, factorial, ceil, log # для усложненных математических действий
 import pandas as pd # библиотека для работы с удобными таблицами
 
-
 def decimalToBinary(value):
     """
     функция для перевода любого числа в двоичную с/с
